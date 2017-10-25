@@ -1,11 +1,6 @@
-maxscale-docker
-===============
+# docker-maxscale
 
-This project is a Docker container for MaxScale. 
-
-[![](https://images.microbadger.com/badges/image/andromedarabbit/maxscale.svg)](https://microbadger.com/images/andromedarabbit/maxscale "Get your own image badge on microbadger.com")
-[![](https://images.microbadger.com/badges/license/andromedarabbit/maxscale.svg)](https://microbadger.com/images/andromedarabbit/maxscale "Get your own license badge on microbadger.com")
-
+This project is a Docker image for MaxScale. 
 
 Base [docker image](http://www.docker.io) to run a [MaxScale](https://mariadb.com/products/mariadb-maxscale) server
 
@@ -13,12 +8,13 @@ Base [docker image](http://www.docker.io) to run a [MaxScale](https://mariadb.co
     It’s pluggable architecture is designed to increase flexibility and aid customization. Built upon a lightweight, high-speed networking core designed to facilitate throughput.
     MariaDB MaxScale runs between the client application and the database cluster offering connection and statement-based load balancing. 
     MariaDB MaxScale allows scaling of an organization's database infrastructure while keeping the needs of DBAs, Developers and Data Architects in mind.
+This project is a Docker container for MaxScale.
 
 ## Getting the container
 
 The container is very small and available on the Docker Index:
 
-    docker pull andromedarabbit/maxscale
+    docker pull dailyhotel/maxscale
 
 ## Using the container
 
@@ -26,13 +22,13 @@ Just trying out MaxScale.
 
 If you just want to run a single instance of MaxScale server to try out its functionality:
 
-    docker run -d andromedarabbit/maxscale
+    docker run -d dailyhotel/maxscale
 
 ## Build the container
 
-To create the image `andromedarabbit/maxscale`, execute the following command on the maxscale-docker folder:
+To create the image `dailyhotel/maxscale`, execute the following command on the maxscale-docker folder:
 
-    docker build -t andromedarabbit/maxscale .
+    docker build -t dailyhotel/maxscale .
 
 ## Thanks
 
