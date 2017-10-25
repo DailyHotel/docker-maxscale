@@ -1,3 +1,6 @@
+[![](https://images.microbadger.com/badges/image/dailyhotel/maxscale.svg)](https://microbadger.com/images/dailyhotel/maxscale "Get your own image badge on microbadger.com")
+[![](https://images.microbadger.com/badges/license/dailyhotel/maxscale.svg)](https://microbadger.com/images/dailyhotel/maxscale "Get your own license badge on microbadger.com")
+
 # docker-maxscale
 
 This project is a Docker image for MaxScale. 
@@ -47,5 +50,5 @@ Contributions are welcome.
 
 ## License
 
-Copyright 2015 Andrea Sosso
+Copyright 2015 (주)데일리
 Licensed under the MIT License
