@@ -1,15 +1,27 @@
-FROM centos:7
-MAINTAINER Jaehoon Choi <plaintext@andromedarabbit.net>
+FROM debian:stable
 
-ENV MAXSCALE_URL https://downloads.mariadb.com/MaxScale/2.1.5/rhel/7/x86_64/maxscale-2.1.5-1.rhel.7.x86_64.rpm
+LABEL maintainer="Jaehoon Choi <plaintext@andromedarabbit.net>"
 
-RUN rpm --import https://yum.mariadb.org/RPM-GPG-KEY-MariaDB \
-    && yum -y install https://downloads.mariadb.com/enterprise/yzsw-dthq/generate/10.0/mariadb-enterprise-repository.rpm \
-    && yum -y update \
-    && yum deplist maxscale | grep provider | awk '{print $2}' | sort | uniq | grep -v maxscale | sed ':a;N;$!ba;s/\n/ /g' | xargs yum -y install \
-    && rpm -Uvh $MAXSCALE_URL \
-    && yum clean all \
-    && rm -rf /tmp/*
+ARG DEBIAN_FRONTEND
+ENV DEBIAN_FRONTEND=noninteractive
+
+ARG MAXSCALE_URL
+ENV MAXSCALE_URL=http://downloads.mariadb.com/enterprise/4d7m-n51s/mariadb-maxscale/latest/debian/dists/stretch/main/binary-amd64/maxscale-2.1.9-1.debian.stretch.x86_64.deb
+
+# Setup base packages.
+RUN apt-get update \
+    && apt-get upgrade -y \
+    && apt-get install -y --no-install-recommends apt-utils \
+    && apt-get install -y --no-install-recommends curl \
+    && apt-get install -y --no-install-recommends libsqlite3-dev \
+    && apt-get install -y --no-install-recommends libssl1.1 \
+    && apt-get purge -y --auto-remove \
+                     -o APT::AutoRemove::RecommendsImportant=false
+
+RUN curl -o maxscale.deb ${MAXSCALE_URL}
+
+RUN dpkg -i maxscale.deb \
+    && rm maxscale.deb
 
 # Move configuration file in directory for exports
 RUN mkdir -p /etc/maxscale.d \
@@ -18,6 +30,7 @@ RUN mkdir -p /etc/maxscale.d \
 
 # VOLUME for custom configuration
 VOLUME ["/etc/maxscale.d"]
+
 
 # EXPOSE the MaxScale default ports
 
